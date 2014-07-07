@@ -6,7 +6,7 @@
 			id: rect
 			pos: self.pos
 			size: self.size	
-			
+	
 	orientation: 'vertical'
 	
 	Image:
@@ -21,78 +21,93 @@
 			size_hint_y: None
 			height: image_gif.height
 			width: image_gif.width
+			halign: 'center'
+			valign: 'bottom'
+			scroll_y: 0
+	
 		
-		
-
-
+<ScrollableLabel>:
+    text: 
+	Label:
+        text: root.text
+        font_size: 10
+        text_size: self.width, None
+        size_hint_y: None
+        height: self.texture_size[1]
+       
+			
 <ScatterTextWidget>:
-	canvas:
-		Color:
-			rgba: [ 0.07, 0.1, 0.3, 1]
-		Rectangle:
-			pos: self.pos
-			size: self.size	
-	orientation: 'vertical'
 	
+	id: layout1
+	orientation: 'horizontal'
 	Image:
-		source: 'spaceshipgif.zip'
+		id: centre_image
+		source: 'Template.png'
 		allow_stretch: True
-		anim_delay: 0.075
-	
-
-	TextInput:
-		id: my_textinput
-		text: root.somestring
-		background_color: [0.7, 0.7, 0.7, 1]
-		foreground_color: [1,1,1,1]
-		readonly: True
-		use_bubble: False
-		selection_color: [0,0,0,0]
-
-	
-	BoxLayout:
-		canvas:
-			Color:
-				rgba: [ 0.07, 0.1, 0.3, 1]
-			Rectangle:
-				pos: self.pos
-				size: self.size	
-		orientation: 'horizontal'
+		keep_ratio: False
 		
-		height: 150
+		
 		BoxLayout:
+			pos: centre_image.pos
 			orientation: 'vertical'
+			width: centre_image.width
+			height: centre_image.height
 			
-			height: 150
-			Button:
-				id: button1
-				text: '1'
-				background_normal: 'Buttonup.png'
-				background_down: 'Buttondown.png'
-				on_press: root.button1press()
+			BoxLayout:
+				padding: [(0.1075 * centre_image.width), (0.06 * centre_image.height), (0.1075 * centre_image.width), (0.11 * centre_image.height)]
+				TextInput:
+						
+					text: str(centre_image.size)
+					
+					background_color: [0, 0, 1, 1]
+					x: centre_image.x
+					y: centre_image.height / 2
+					canvas:
+						Color:
+							rgba: [1, 0, 0, 0]
+						Rectangle:
+							pos: self.pos
+							size: self.size	
+					
+			BoxLayout:
+				id: boxlayout
+				
+				orientation: 'horizontal'
+		
+				height: 150
+				BoxLayout:
+					orientation: 'vertical'
+					
+					height: 150
+					Button:
+						
+						id: button1
+						text: '1'
+						background_normal: 'Buttonup.png'
+						background_down: 'Buttondown.png'
+						on_press: root.button1press()
 
 
 				
-			Button:
-				id: button2
-				text: '2'
-				background_normal: 'Buttonup.png'
-				background_down: 'Buttondown.png'
+					Button:
+						id: button2
+						text: '2'
+						background_normal: 'Buttonup.png'
+						background_down: 'Buttondown.png'
 				
 			
 	
-		BoxLayout:
-			orientation: 'vertical'
-			
-			height: 150
-			Button:
-				id: button3
-				text: '3'
-				background_normal: 'Buttonup.png'
-				background_down: 'Buttondown.png'
-	
-			Button:
-				id: button4
-				text: '4'
-				background_normal: 'Buttonup.png'
-				background_down: 'Buttondown.png'
+				BoxLayout:
+					orientation: 'vertical'
+					height: 150
+					Button:
+						id: button3
+						text: '3'
+						background_normal: 'Buttonup.png'
+						background_down: 'Buttondown.png'
+		
+					Button:
+						id: button4
+						text: '4'
+						background_normal: 'Buttonup.png'
+						background_down: 'Buttondown.png'

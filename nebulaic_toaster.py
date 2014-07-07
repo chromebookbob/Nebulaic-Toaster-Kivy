@@ -18,9 +18,14 @@ import random
 
 
 class ScatterTextWidget(BoxLayout, Image):
-	pass
+	textboxtext = StringProperty('')
+	def printout(self, thetext):
+		tbt = self.ids['textbox1']
+		tbt.text = tbt.text + " " + thetext
+	def button1press(self, *args):
+		self.printout("Hello WOrld")
 class StartupGif(BoxLayout):
-	windowidth = NumericProperty(1000)
+
 	def rungif(self, *args):
 		gifid = self.ids['image_gif']
 		

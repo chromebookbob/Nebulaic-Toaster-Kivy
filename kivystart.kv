@@ -56,10 +56,10 @@
 			BoxLayout:
 				padding: [(0.1075 * centre_image.width), (0.06 * centre_image.height), (0.1075 * centre_image.width), (0.11 * centre_image.height)]
 				TextInput:
-						
-					text: str(centre_image.size)
+					id: textbox1
+					text: 'hello'
 					
-					background_color: [0, 0, 1, 1]
+					background_color: [0, 0, 1, 0]
 					x: centre_image.x
 					y: centre_image.height / 2
 					canvas:
@@ -86,7 +86,7 @@
 						background_normal: 'Buttonup.png'
 						background_down: 'Buttondown.png'
 						on_press: root.button1press()
-
+						font_size: 70
 
 				
 					Button:
@@ -94,7 +94,7 @@
 						text: '2'
 						background_normal: 'Buttonup.png'
 						background_down: 'Buttondown.png'
-				
+						font_size: 70
 			
 	
 				BoxLayout:
@@ -105,9 +105,10 @@
 						text: '3'
 						background_normal: 'Buttonup.png'
 						background_down: 'Buttondown.png'
-		
+						font_size: 70
 					Button:
 						id: button4
 						text: '4'
 						background_normal: 'Buttonup.png'
 						background_down: 'Buttondown.png'
+						font_size: 70

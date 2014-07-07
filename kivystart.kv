@@ -1,0 +1,98 @@
+<StartupGif>:
+	canvas:
+		Color:
+			rgba: [ 0.07, 0.1, 0.3, 1]
+		Rectangle:
+			id: rect
+			pos: self.pos
+			size: self.size	
+			
+	orientation: 'vertical'
+	
+	Image:
+		id: image_gif
+		source: 'initiatestop.png'
+		allow_stretch: True
+		anim_delay: 0.1
+		Button:
+			id: initiate_button
+			background_color: [0, 0, 0, 0]
+			on_press: root.rungif()
+			size_hint_y: None
+			height: image_gif.height
+			width: image_gif.width
+		
+		
+
+
+<ScatterTextWidget>:
+	canvas:
+		Color:
+			rgba: [ 0.07, 0.1, 0.3, 1]
+		Rectangle:
+			pos: self.pos
+			size: self.size	
+	orientation: 'vertical'
+	
+	Image:
+		source: 'spaceshipgif.zip'
+		allow_stretch: True
+		anim_delay: 0.075
+	
+
+	TextInput:
+		id: my_textinput
+		text: root.somestring
+		background_color: [0.7, 0.7, 0.7, 1]
+		foreground_color: [1,1,1,1]
+		readonly: True
+		use_bubble: False
+		selection_color: [0,0,0,0]
+
+	
+	BoxLayout:
+		canvas:
+			Color:
+				rgba: [ 0.07, 0.1, 0.3, 1]
+			Rectangle:
+				pos: self.pos
+				size: self.size	
+		orientation: 'horizontal'
+		
+		height: 150
+		BoxLayout:
+			orientation: 'vertical'
+			
+			height: 150
+			Button:
+				id: button1
+				text: '1'
+				background_normal: 'Buttonup.png'
+				background_down: 'Buttondown.png'
+				on_press: root.button1press()
+
+
+				
+			Button:
+				id: button2
+				text: '2'
+				background_normal: 'Buttonup.png'
+				background_down: 'Buttondown.png'
+				
+			
+	
+		BoxLayout:
+			orientation: 'vertical'
+			
+			height: 150
+			Button:
+				id: button3
+				text: '3'
+				background_normal: 'Buttonup.png'
+				background_down: 'Buttondown.png'
+	
+			Button:
+				id: button4
+				text: '4'
+				background_normal: 'Buttonup.png'
+				background_down: 'Buttondown.png'

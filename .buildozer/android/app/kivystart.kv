@@ -1,0 +1,127 @@
+<StartupGif>:
+	canvas:
+		Color:
+			rgba: [ 0.07, 0.1, 0.3, 1]
+		Rectangle:
+			id: rect
+			pos: self.pos
+			size: self.size	
+	
+	orientation: 'vertical'
+	
+	Image:
+		id: image_gif
+		source: 'initiatestop.png'
+		allow_stretch: True
+		anim_delay: 0.1
+		Button:
+			id: initiate_button
+			background_color: [0, 0, 0, 0]
+			on_press: root.rungif()
+			size_hint_y: None
+			height: image_gif.height
+			width: image_gif.width
+			halign: 'center'
+			valign: 'bottom'
+			scroll_y: 0
+	
+		
+<ScrollableLabel>:
+    text: 
+	Label:
+        text: root.text
+        font_size: 10
+        text_size: self.width, None
+        size_hint_y: None
+        height: self.texture_size[1]
+       
+			
+<MainGui>:
+	orientation: 'horizontal'
+	canvas:
+		Color:
+			rgba: 0, 0, 0, 1
+		Rectangle:
+			pos: self.pos
+			size: self.size
+	BoxLayout:
+		id: layout1
+		orientation: 'horizontal'
+		on_parent: root.start1 = True
+		Image:
+			id: centre_image
+			source: 'Template.png'
+			allow_stretch: True
+			keep_ratio: False
+		
+		
+			BoxLayout:
+				pos: centre_image.pos
+				orientation: 'vertical'
+				width: centre_image.width
+				height: centre_image.height
+			
+				BoxLayout:
+					padding: [(0.1075 * centre_image.width), (0.06 * centre_image.height), (0.1075 * centre_image.width), (0.11 * centre_image.height)]
+					TextInput:
+						
+						id: textbox1
+						text: root.textboxtext
+						foreground_color: [0, 0, 0, 1]
+						readonly: True
+						background_color: [0, 0, 1, 0]
+						x: centre_image.x
+						y: centre_image.height / 2
+						font_size: 10
+						background_active: 'day1.png'
+						
+				BoxLayout:
+					background_color: [0, 0, 0, 0]
+					id: boxlayout
+					
+					orientation: 'horizontal'
+			
+					height: 150
+					BoxLayout:
+						orientation: 'vertical'
+						background_color: [0, 0, 0, 0]
+						height: 150
+						Button:
+							
+							id: button1
+							text: '1'
+							background_normal: 'Buttonup.png'
+							background_down: 'Buttondown.png'
+							on_release: root.button1()
+						
+							font_size: 70
+
+				
+						Button:
+							id: button3
+							text: '3'
+							background_normal: 'Buttonup.png'
+							background_down: 'Buttondown.png'
+							on_release: root.button3()
+							font_size: 70
+			
+	
+					BoxLayout:
+						background_color: [0, 0, 0, 0]
+						orientation: 'vertical'
+						height: 150
+						Button:
+							id: button2
+							text: '2'
+							background_normal: 'Buttonup.png'
+							background_down: 'Buttondown.png'
+							on_release: root.button2()
+							font_size: 70
+						Button:
+							id: button4
+							text: '4'
+							background_normal: 'Buttonup.png'
+							background_down: 'Buttondown.png'
+							on_release: root.button4()
+							font_size: 70
+				

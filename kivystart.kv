@@ -26,14 +26,7 @@
 			scroll_y: 0
 	
 		
-<ScrollableLabel>:
-    text: 
-	Label:
-        text: root.text
-        font_size: 10
-        text_size: self.width, None
-        size_hint_y: None
-        height: self.texture_size[1]
+
        
 			
 <MainGui>:
@@ -72,7 +65,7 @@
 						background_color: [0, 0, 1, 0]
 						x: centre_image.x
 						y: centre_image.height / 2
-						font_size: 10
+						font_size: 30
 						background_active: 'day1.png'
 						
 				BoxLayout:
@@ -94,7 +87,7 @@
 							background_down: 'Buttondown.png'
 							on_release: root.button1()
 						
-							font_size: 70
+							font_size: 100
 
 				
 						Button:
@@ -103,7 +96,7 @@
 							background_normal: 'Buttonup.png'
 							background_down: 'Buttondown.png'
 							on_release: root.button3()
-							font_size: 70
+							font_size: 100
 			
 	
 					BoxLayout:
@@ -116,12 +109,12 @@
 							background_normal: 'Buttonup.png'
 							background_down: 'Buttondown.png'
 							on_release: root.button2()
-							font_size: 70
+							font_size: 100
 						Button:
 							id: button4
 							text: '4'
 							background_normal: 'Buttonup.png'
 							background_down: 'Buttondown.png'
 							on_release: root.button4()
-							font_size: 70
+							font_size: 100
 				

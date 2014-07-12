@@ -106,8 +106,19 @@ NEWS VOID
 		else:
 			img.source = 'TemplatePic.png'
 		self.day += 1
-		
-		
+
+	def inspect(self, type, onoff):
+		tb1 = self.ids['textbox1']
+		img = self.ids['centre_image']
+		if onoff == True:
+			tb1.foregroundcolor = [1, 1, 1, 0]
+			img.source = 'inspect%s.png' % type
+		else:
+			tb1.foregroundcolor = [0, 0, 0, 1]
+			if self.postit == False:
+				img.source = 'TemplatePic.png'
+			else:
+				img.source = 'Templatepostit.png'
 	def button1(self):
 		if self.next == 'start':
 			self.printout("For a photo of your loved one press 1...", 'newline')
@@ -122,10 +133,11 @@ NEWS VOID
 			self.next = 'day1'
 		elif self.next == 'day1':
 			self.newdaystop()
-			self
+			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Hello WOrld")
 			self.next = 'day1a'
 		elif self.next == 'day1a':
-			pass
+			self.inspect('planet1', True)
+			
 			
 			
 		else:
@@ -143,6 +155,7 @@ NEWS VOID
 	def button3(self):
 		if self.next == 'day1':
 			self.newdaystop()
+			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Hello WOrld")
 			self.next = 'day1a'
 		elif self.next == 'day1a':
 			pass
@@ -153,6 +166,7 @@ NEWS VOID
 	def button4(self):
 		if self.next == 'day1':
 			self.newdaystop()
+			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Hello WOrld")
 			self.next = 'day1a'
 		elif self.next == 'day1a':
 			pass

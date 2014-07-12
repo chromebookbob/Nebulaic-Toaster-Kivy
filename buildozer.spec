@@ -1,53 +1,50 @@
 [app]
 
 # (str) Title of your application
-title = Nebulaic_Toaster
+title = nebulaic_toaster
 
 # (str) Package name
-package.name = nebulaic-toaster
+package.name = nebulaic_toaster
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = org.chromebookbob
+package.domain = org.test
 
 # (str) Source code where the main.py live
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas, zip
+source.include_exts = png, zip
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-#source.exclude_dirs = tests, bin
+#source.exclude_dirs = tests
 
 # (list) List of exclusions using pattern matching
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-#version.regex = __version__ = ['"](.*)'['"]
-#version.filename = %(source.dir)s/main.py
+# version.regex = __version__ = '(.*)'
+# version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
 version = 1.0
 
 # (list) Application requirements
-requirements = kivy
-
-# (list) Garden requirements
-#garden_requirements =
+requirements = kivy, pil
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/ICON.png
+presplash.filename = %(source.dir)s/data/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/ICON.png
+icon.filename = %(source.dir)s/data/icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
-orientation = portrait
+orientation = all
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = True
+fullscreen = 0
 
 
 #
@@ -58,7 +55,7 @@ fullscreen = True
 #android.permissions = INTERNET
 
 # (int) Android API to use
-#android.api = 20
+#android.api = 14
 
 # (int) Minimum API required (8 = Android 2.2 devices)
 #android.minapi = 8
@@ -67,7 +64,7 @@ fullscreen = True
 #android.sdk = 21
 
 # (str) Android NDK version to use
-#android.ndk = 9c
+#android.ndk = 9
 
 # (bool) Use --private data storage (True) or --dir public storage (False)
 #android.private_storage = True
@@ -76,13 +73,10 @@ fullscreen = True
 #android.ndk_path =
 
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
-#android.sdk_path =
+#android.sdk_path = 
 
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
 #android.p4a_dir =
-
-# (list) python-for-android whitelist
-#android.p4a_whitelist =
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.renpy.android.PythonActivity
@@ -109,13 +103,10 @@ fullscreen = True
 #android.ouya.icon.filename = %(source.dir)s/data/ouya_icon.png
 
 # (str) XML file to include as an intent filters in <activity> tag
-#android.manifest.intent_filters =
+#android.manifest.intent_filters = 
 
 # (list) Android additionnal libraries to copy into libs/armeabi
 #android.add_libs_armeabi = libs/android/*.so
-#android.add_libs_armeabi_v7a = libs/android-v7/*.so
-#android.add_libs_x86 = libs/android-x86/*.so
-#android.add_libs_mips = libs/android-mips/*.so
 
 # (bool) Indicate whether the screen should stay on
 # Don't forget to add the WAKE_LOCK permission if you set this to True
@@ -148,7 +139,7 @@ log_level = 2
 
 # -----------------------------------------------------------------------------
 # List as sections
-#
+# 
 # You can define all the "list" as [section:key].
 # Each line will be considered as a option to the list.
 # Let's take [app] / source.exclude_patterns.

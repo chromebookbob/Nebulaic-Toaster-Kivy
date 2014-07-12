@@ -7,6 +7,8 @@ from kivy.properties import ListProperty
 from kivy.properties import StringProperty
 from kivy.properties import NumericProperty
 from kivy.properties import ObjectProperty
+from kivy.clock import Clock
+from functools import partial
 import time
 import random
 
@@ -34,10 +36,15 @@ Good luck Captain. \n captain%d@shipA113: Take Command, Press 1""" % (capnum, ca
 	def printout(self, thetext, type):
 			tbt = self.ids['textbox1']
 			thetext = " " + thetext + " " 
+			def addletter(self, letter, *args):
+				self.tbt.text = self.tbt.text + letter
 			if type == 'add':
 				tbt.text = tbt.text + thetext
 			elif type == 'newline':
 				tbt.text = tbt.text + "\n captain%d@shipA113: %s" % (self.capnum, thetext)		
+			elif type == 'typewriter':
+				for i in range(0, len(thetext)):
+					Clock.schedule_once(addletter, thetext[i-1, i], 0.1)
 			else:
 				tbt.text = thetext		
 	def DailyMessage(self, news, message):
@@ -81,7 +88,7 @@ NEWS VOID
 		but3.color = [1, 1, 1, 0]
 		but4.color = [1, 1, 1, 0]
 		img.source = 'day%d.png' % self.day
-	def newdaystop(self):
+	def newdaystop(self, huk):
 		but1 = self.ids['button1']
 		but2 = self.ids['button2']
 		but3 = self.ids['button3']
@@ -111,17 +118,18 @@ NEWS VOID
 		tb1 = self.ids['textbox1']
 		img = self.ids['centre_image']
 		if onoff == True:
-			tb1.foregroundcolor = [1, 1, 1, 0]
+			tb1.foreground_color = [1, 1, 1, 0]
+			tb1.disabled_foreground_color = [1, 1, 1, 0]
 			img.source = 'inspect%s.png' % type
 		else:
-			tb1.foregroundcolor = [0, 0, 0, 1]
+			tb1.foreground_color = [1, 1, 1, 1]
 			if self.postit == False:
 				img.source = 'TemplatePic.png'
 			else:
 				img.source = 'Templatepostit.png'
 	def button1(self):
 		if self.next == 'start':
-			self.printout("For a photo of your loved one press 1...", 'newline')
+			self.printout("For a photo of your loved one press 1...", 'typewriter')
 			self.next = 'start2'
 		elif self.next == 'start2':
 			centre_image = self.ids['centre_image']
@@ -130,7 +138,7 @@ NEWS VOID
 			self.next = 'start3'
 		elif self.next == 'start3':
 			self.newday()
-			self.next = 'day1'
+			Clock.schedule_once((self.newdaystop), 3)
 		elif self.next == 'day1':
 			self.newdaystop()
 			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Hello WOrld")
@@ -179,14 +187,14 @@ class StartupGif(BoxLayout):
 	
 	def rungif(self, *args):
 		gifid = self.ids['image_gif']
+		gifid.source = 'initiatestart.zip'
+		Clock.schedule_once((self.start), 2)
+	def start(self, *args):
+		gifid = self.ids['image_gif']
 		button1 = self.ids['initiate_button']
-		if gifid.source =='initiatestart.zip':
-			button1.size = [0,0]
-			MainGui.start = True
-			GameName().run()
-			
-		else:
-			gifid.source = 'initiatestart.zip'
+		button1.size = [0,0]
+		MainGui.start = True
+		GameName().run()
 	def donothing(self, *args):
 		pass
 class KivyStart(App):

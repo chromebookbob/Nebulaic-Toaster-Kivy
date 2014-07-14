@@ -18,12 +18,13 @@ __version__ = '1.0'
 
 class MainGui(BoxLayout, Image):
 	capnum = 113
+	black = False
 	button_pressed = 0
 	start1 = False	
 	next = 'start'
 	day = 1
 	postit = False
-	news = ["Trans-Humanism: Augmentation in sport rife", "Google Sued:The major corporation has been sued by the human race for breach of trust", "Simpsons at 1020: starting season 1000 after 20 year haitus", "Fidel Castro Dead: Cuban Officials Announce death of leader hundreds of years after fall of the reigime"] 
+	news = ["Trans-Humanism: Augmentation in sport rife", "The Day After Tommorow: The True story of a father and son reunited in the blizzards of New Manhattan","Google Sued:The major corporation has been sued by the human race for breach of trust", "Simpsons at 1020: starting season 1000 after 20 year haitus", "Fidel Castro Dead: Cuban Officials Announce death of leader hundreds of years after fall of the reigime"] 
 	newson = True
 	textboxtext = """Welcome Captain %d, you have been woken from cryosleep to control this ship.
 You will receive instructions on a daily basis outlining your course of action. You have a computer terminal, and four keys.
@@ -38,7 +39,7 @@ Good luck Captain. \n captain%d@shipA113: Take Command, Press 1""" % (capnum, ca
 	def addletter(self, letter, *args):
 		tbt = self.ids['textbox1']
 		tbt.text = tbt.text + letter
-	def printout(self, thetext, type):
+	def printout(self, thetext, type, *args):
 			tbt = self.ids['textbox1']
 			thetext = " " + thetext + " " 
 			
@@ -51,7 +52,7 @@ Good luck Captain. \n captain%d@shipA113: Take Command, Press 1""" % (capnum, ca
 					Clock.schedule_once(partial(self.addletter, thetext[i-1:i]), 0.1)
 			else:
 				tbt.text = thetext		
-	def DailyMessage(self, news, message):
+	def DailyMessage(self, news, message, *args):
 		
 		if self.newson == True:
 			text = """*INCOMING TRANSMISSION*
@@ -71,11 +72,12 @@ NEWS VOID
 %s
 """ % (self.day, self.day, message)
 		self.printout(text , "")		
-	def newday(self):
+	def newday(self, *args):
 		but1 = self.ids['button1']
 		but2 = self.ids['button2']
 		but3 = self.ids['button3']
 		but4 = self.ids['button4']
+		
 		img = self.ids['centre_image']
 		tb = self.ids['textbox1']
 		but1.background_normal = 'clear.png'
@@ -91,8 +93,12 @@ NEWS VOID
 		but2.color = [1, 1, 1, 0]
 		but3.color = [1, 1, 1, 0]
 		but4.color = [1, 1, 1, 0]
-		img.source = 'day%d.png' % self.day
-	def newdaystop(self, huk):
+		if self.black == True:
+			img.source = 'day0.png'
+			self.black = False
+		else:
+			img.source = 'day%d.png' % self.day
+	def newdaystop(self, *args):
 		but1 = self.ids['button1']
 		but2 = self.ids['button2']
 		but3 = self.ids['button3']
@@ -131,6 +137,14 @@ NEWS VOID
 				img.source = 'TemplatePic.png'
 			else:
 				img.source = 'Templatepostit.png'
+	def jump(self, *args):
+		self.printout("Preparing to jump, shutting down console...", "")
+		self.black = True
+		Clock.schedule_once(partial(self.inspect, 'dark', True), 0.1)
+		Clock.schedule_once((self.newday), 1)
+		Clock.schedule_once((self.newday), 2)
+		Clock.schedule_once((self.newdaystop), 5)
+		Clock.schedule_once(partial(self.printout, "Booting Up", ""), 5.1)
 	def button1(self):
 		if self.next == 'start':
 			self.printout("For a photo of your loved one press 1...", 'typewriter')
@@ -156,6 +170,10 @@ NEWS VOID
 		elif self.next == 'day1a':
 			self.printout("Just Stars:\nAny Key: Move On", "newline")
 			self.next = 'jump'
+		elif self.next == 'jump':
+			self.jump()
+			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
+			
 		else:
 			pass
 	def button2(self):
@@ -166,7 +184,10 @@ NEWS VOID
 			self.next = 'day1a'
 		elif self.next == 'day1a':
 			self.printout("Planet Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event", "newline")
-			
+		elif self.next == 'jump':
+			self.jump()
+			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
+				
 		else:
 			pass	
 	def button3(self):
@@ -177,7 +198,10 @@ NEWS VOID
 			self.next = 'day1a'
 		elif self.next == 'day1a':
 			self.printout("Unidentified Object Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event", "newline")
-			
+		elif self.next == 'jump':
+			self.jump()
+			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
+				
 			
 			
 		else:
@@ -190,6 +214,11 @@ NEWS VOID
 			self.next = 'day1a'
 		elif self.next == 'day1a':
 			self.printout("Alien Vessel Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event" "newline")
+		elif self.next == 'jump':
+			self.jump()
+			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
+			
+		
 		else:
 			pass
 	

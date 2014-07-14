@@ -22,7 +22,9 @@ class MainGui(BoxLayout, Image):
 	button_pressed = 0
 	start1 = False	
 	next = 'start'
+	log = []
 	day = 1
+	event = ''
 	postit = False
 	news = ["Trans-Humanism: Augmentation in sport rife", "The Day After Tommorow: The True story of a father and son reunited in the blizzards of New Manhattan","Google Sued:The major corporation has been sued by the human race for breach of trust", "Simpsons at 1020: starting season 1000 after 20 year haitus", "Fidel Castro Dead: Cuban Officials Announce death of leader hundreds of years after fall of the reigime"] 
 	newson = True
@@ -172,7 +174,25 @@ NEWS VOID
 			self.next = 'jump'
 		elif self.next == 'jump':
 			self.jump()
+			self.next = 'day2'
+			self.button4()
+		elif self.next == 'day2':
 			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
+		elif self.next == 'planet':
+			printout('Sending signals...', 'newline')
+			self.event = 'Sent signals to planet'
+			if self.day < 4:
+				printout('No reply recieved, logging event')
+				self.log.append('day ' + 'self.day' + ': ' + self.event + ' None recieved') 
+			else:
+				int = random.randint(1, 5)
+				if int == 1:
+					printout('Incoming Transmission...')
+				else:
+					printout('No reply recieved, logging event')
+					self.log.append('day ' + 'self.day' + ': ' + self.event + ' None recieved')
+					printout('Press any key to jump...', 'newline')
+					self.next = 'jump'	
 			
 		else:
 			pass
@@ -184,10 +204,18 @@ NEWS VOID
 			self.next = 'day1a'
 		elif self.next == 'day1a':
 			self.printout("Planet Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event", "newline")
+			self.event = 'Planet Sighted'
+			self.next == 'planet'
 		elif self.next == 'jump':
 			self.jump()
+			self.next = 'day2'
+			self.button4()
+		elif self.next == 'day2':
 			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
-				
+		elif self.next == 'planet':
+			self.printout('Press any key to jump...', 'newline')
+			self.next = 'jump'
+			
 		else:
 			pass	
 	def button3(self):
@@ -200,8 +228,11 @@ NEWS VOID
 			self.printout("Unidentified Object Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event", "newline")
 		elif self.next == 'jump':
 			self.jump()
+			self.next = 'day2'
+			self.button4()
+		elif self.next == 'day2':
 			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
-				
+			
 			
 			
 		else:
@@ -216,8 +247,12 @@ NEWS VOID
 			self.printout("Alien Vessel Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event" "newline")
 		elif self.next == 'jump':
 			self.jump()
+			self.next = 'day2'
+			self.button4()
+		elif self.next == 'day2':
 			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
-			
+		elif self.next == 'planet':
+			self.log.append('day ' + 'self.day' + ': ' + self.event)
 		
 		else:
 			pass

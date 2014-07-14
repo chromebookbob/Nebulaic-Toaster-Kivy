@@ -9,6 +9,8 @@ from kivy.properties import NumericProperty
 from kivy.properties import ObjectProperty
 from kivy.clock import Clock
 from functools import partial
+from kivy.animation import Animation
+from kivy.core.audio import SoundLoader
 import time
 import random
 
@@ -33,18 +35,20 @@ Good luck Captain. \n captain%d@shipA113: Take Command, Press 1""" % (capnum, ca
  
 		while time_end > time.time():
 			pass
+	def addletter(self, letter, *args):
+		tbt = self.ids['textbox1']
+		tbt.text = tbt.text + letter
 	def printout(self, thetext, type):
 			tbt = self.ids['textbox1']
 			thetext = " " + thetext + " " 
-			def addletter(self, letter, *args):
-				self.tbt.text = self.tbt.text + letter
+			
 			if type == 'add':
 				tbt.text = tbt.text + thetext
 			elif type == 'newline':
 				tbt.text = tbt.text + "\n captain%d@shipA113: %s" % (self.capnum, thetext)		
 			elif type == 'typewriter':
 				for i in range(0, len(thetext)):
-					Clock.schedule_once(addletter, thetext[i-1, i], 0.1)
+					Clock.schedule_once(partial(self.addletter, thetext[i-1:i]), 0.1)
 			else:
 				tbt.text = thetext		
 	def DailyMessage(self, news, message):
@@ -114,7 +118,7 @@ NEWS VOID
 			img.source = 'TemplatePic.png'
 		self.day += 1
 
-	def inspect(self, type, onoff):
+	def inspect(self, type, onoff, *args):
 		tb1 = self.ids['textbox1']
 		img = self.ids['centre_image']
 		if onoff == True:
@@ -122,7 +126,7 @@ NEWS VOID
 			tb1.disabled_foreground_color = [1, 1, 1, 0]
 			img.source = 'inspect%s.png' % type
 		else:
-			tb1.foreground_color = [1, 1, 1, 1]
+			tb1.foreground_color = [0, 0, 0, 1]
 			if self.postit == False:
 				img.source = 'TemplatePic.png'
 			else:
@@ -139,64 +143,78 @@ NEWS VOID
 		elif self.next == 'start3':
 			self.newday()
 			Clock.schedule_once((self.newdaystop), 3)
+			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded.")
+			self.printout("Press Any Key To Inspect Snapshot...", 'newline')
+			
+			self.next = 'day1'
 		elif self.next == 'day1':
-			self.newdaystop()
-			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Hello WOrld")
+			self.inspect('stars', True)
+			Clock.schedule_once(partial(self.inspect, 'stars', False), 3)
+			self.printout("Report What You Have Seen:\n1. Just Stars\n2. Planet \n3.Unidentified Object\n4.Alien Vessel", " ")
 			self.next = 'day1a'
+			
 		elif self.next == 'day1a':
-			self.inspect('planet1', True)
-			
-			
-			
+			self.printout("Just Stars:\nAny Key: Move On", "newline")
+			self.next = 'jump'
 		else:
 			pass
 	def button2(self):
 		if self.next == 'day1':
-			self.newdaystop()
-			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Hello WOrld")
+			self.inspect('stars', True)
+			Clock.schedule_once(partial(self.inspect, 'stars', False), 3)
+			self.printout("Report What You Have Seen:\n1. Just Stars\n2. Planet \n3.Unidentified Object\n4.Alien Vessel", " ")
 			self.next = 'day1a'
 		elif self.next == 'day1a':
-			pass
+			self.printout("Planet Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event", "newline")
 			
 		else:
 			pass	
 	def button3(self):
 		if self.next == 'day1':
-			self.newdaystop()
-			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Hello WOrld")
+			self.inspect('stars', True)
+			Clock.schedule_once(partial(self.inspect, 'stars', False), 3)
+			self.printout("Report What You Have Seen:\n1. Just Stars\n2. Planet \n3.Unidentified Object\n4.Alien Vessel", " ")
 			self.next = 'day1a'
 		elif self.next == 'day1a':
-			pass
+			self.printout("Unidentified Object Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event", "newline")
+			
 			
 			
 		else:
 			pass
 	def button4(self):
 		if self.next == 'day1':
-			self.newdaystop()
-			self.DailyMessage("Smart Plague: An intelligent bug takes advantage of anti-biotics, no cure found", "Hello WOrld")
+			self.inspect('stars', True)
+			Clock.schedule_once(partial(self.inspect, 'stars', False), 3)
+			self.printout("Report What You Have Seen:\n1. Just Stars\n2. Planet \n3.Unidentified Object\n4.Alien Vessel" "")
 			self.next = 'day1a'
 		elif self.next == 'day1a':
-			pass
-
+			self.printout("Alien Vessel Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event" "newline")
 		else:
 			pass
 	
 	
 class StartupGif(BoxLayout):
-	
+	sound = ObjectProperty(None, allownone=True)
+
+	def donothing(self, *args):
+		pass
+	def soundtrack(self, *args):
+		self.sound = SoundLoader.load('soundtrack.wav')
+		self.sound.loop = True
+		self.sound.play()
 	def rungif(self, *args):
 		gifid = self.ids['image_gif']
+		button1 = self.ids['initiate_button']
 		gifid.source = 'initiatestart.zip'
-		Clock.schedule_once((self.start), 2)
+		button1.on_press = self.start()
 	def start(self, *args):
+		self.soundtrack()
 		gifid = self.ids['image_gif']
 		button1 = self.ids['initiate_button']
 		button1.size = [0,0]
-		MainGui.start = True
 		GameName().run()
-	def donothing(self, *args):
-		pass
+	
 class KivyStart(App):
 	
 	def build(self):
@@ -206,9 +224,6 @@ class GameName(App):
 	
 	def build(self):
 		return MainGui()
-	
-startupgif = StartupGif()
-maingui = MainGui()		
 
 if __name__ == "__main__":
 	KivyStart().run()

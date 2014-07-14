@@ -40,7 +40,6 @@
 	BoxLayout:
 		id: layout1
 		orientation: 'horizontal'
-		on_parent: root.start1 = True
 		Image:
 			id: centre_image
 			source: 'Template.png'
@@ -65,7 +64,7 @@
 						background_color: [0, 0, 1, 0]
 						x: centre_image.x
 						y: centre_image.height / 2
-						font_size: 30
+						font_size: 10
 						background_active: 'day1.png'
 						
 				BoxLayout:
@@ -85,7 +84,7 @@
 							text: '1'
 							background_normal: 'Buttonup.png'
 							background_down: 'Buttondown.png'
-							on_release: root.button1()
+							on_press: root.button1()
 						
 							font_size: 100
 
@@ -95,7 +94,7 @@
 							text: '3'
 							background_normal: 'Buttonup.png'
 							background_down: 'Buttondown.png'
-							on_release: root.button3()
+							on_press: root.button3()
 							font_size: 100
 			
 	
@@ -108,13 +107,13 @@
 							text: '2'
 							background_normal: 'Buttonup.png'
 							background_down: 'Buttondown.png'
-							on_release: root.button2()
+							on_press: root.button2()
 							font_size: 100
 						Button:
 							id: button4
 							text: '4'
 							background_normal: 'Buttonup.png'
 							background_down: 'Buttondown.png'
-							on_release: root.button4()
+							on_press: root.button4()
 							font_size: 100
 				

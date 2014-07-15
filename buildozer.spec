@@ -13,10 +13,9 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = png, zip, wav
-
+source.include_exts =
 # (list) Source files to exclude (let empty to not exclude anything)
-#source.exclude_exts = spec
+source.exclude_exts = apk
 
 # (list) List of directory to exclude (let empty to not exclude anything)
 #source.exclude_dirs = tests

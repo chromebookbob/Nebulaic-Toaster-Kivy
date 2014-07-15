@@ -232,8 +232,8 @@ NEWS VOID
 			self.button4()
 		elif self.next == 'day2':
 			Clock.schedule_once(partial(self.DailyMessage, "Smart Plague: Bug rampages through America in days.", "Report any sightings\nMake no contact with alien bodies\nIf you fail to follow these orders you will be repremanded."), 6)
-			
-			
+		elif self.next == 'planet':
+			printout("Reporting event to earth. Expect response in next broadcast.", "newline")			
 			
 		else:
 			pass
@@ -241,10 +241,10 @@ NEWS VOID
 		if self.next == 'day1':
 			self.inspect('stars', True)
 			Clock.schedule_once(partial(self.inspect, 'stars', False), 3)
-			self.printout("Report What You Have Seen:\n1. Just Stars\n2. Planet \n3.Unidentified Object\n4.Alien Vessel" "")
+			self.printout("Report What You Have Seen:\n1. Just Stars\n2. Planet \n3.Unidentified Object\n4.Alien Vessel", "")
 			self.next = 'day1a'
 		elif self.next == 'day1a':
-			self.printout("Alien Vessel Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event" "newline")
+			self.printout("Alien Vessel Sighted, Choose Course Of Action:\n1.Send Contact Signals\n2.Move On\n3.Report\n4.Log Event", "newline")
 		elif self.next == 'jump':
 			self.jump()
 			self.next = 'day2'

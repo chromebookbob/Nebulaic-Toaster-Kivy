@@ -31,12 +31,7 @@
 			
 <MainGui>:
 	orientation: 'horizontal'
-	canvas:
-		Color:
-			rgba: 0, 0, 0, 1
-		Rectangle:
-			pos: self.pos
-			size: self.size
+	
 	BoxLayout:
 		id: layout1
 		orientation: 'horizontal'
@@ -45,7 +40,12 @@
 			source: 'Template.png'
 			allow_stretch: True
 			keep_ratio: False
-		
+			canvas:
+				Color:
+					rgba: 0, 0, 0, root.op
+				Rectangle:
+					pos: self.pos
+					size: self.size
 		
 			BoxLayout:
 				pos: centre_image.pos
